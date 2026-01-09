@@ -7,18 +7,18 @@
     "studio": "bunx mastra studio"
   },
   "dependencies": {
-    "@mastra/ai-sdk": "^1.0.0-beta.11",
-    "@mastra/core": "^1.0.0-beta.15",
-    "@mastra/evals": "^1.0.0-beta.3",
-    "@mastra/hono": "^0.1.0-beta.10",
+    "@mastra/ai-sdk": "1.0.0-beta.14",
+    "@mastra/core": "1.0.0-beta.21",
+    "@mastra/evals": "1.0.0-beta.4",
+    "@mastra/hono": "0.1.0-beta.16",
     "@mastra/libsql": "^1.0.0-beta.9",
-    "@mastra/loggers": "^1.0.0-beta.3",
-    "@mastra/memory": "^1.0.0-beta.7",
-    "@mastra/observability": "^1.0.0-beta.7",
-    "@mastra/pg": "^1.0.0-beta.9",
-    "@mastra/server": "^1.0.0-beta.15",
+    "@mastra/loggers": "1.0.0-beta.4",
+    "@mastra/memory": "1.0.0-beta.12",
+    "@mastra/observability": "1.0.0-beta.10",
+    "@mastra/pg": "1.0.0-beta.12",
+    "@mastra/server": "1.0.0-beta.21",
     "hono": "^4.11.1",
-    "mastra": "^1.0.0-beta.12",
+    "mastra": "1.0.0-beta.14",
     "zod": "^4.2.1"
   },
   "devDependencies": {

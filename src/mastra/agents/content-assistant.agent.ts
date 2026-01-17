@@ -1,32 +1,43 @@
 import { Agent } from '@mastra/core/agent';
 
 import { ExampleOutputProcessor } from '../processors/example-output.processors';
+import { ExampleInputProcessor } from '../processors/example-input.processors';
 
-/**
- * Content Assistant Agent
- *
- * An AI assistant powered by OpenAI GPT-4o that helps with content-related tasks.
- * Uses the StripOutGsOutputProcessor to filter out Google Cloud Storage (gs://) file
- * references from the output, ensuring clean responses without internal file paths.
- *
- * Use cases:
- * - Content summarization
- * - Text analysis
- * - Writing assistance
- * - Document processing feedback
- */
+import { MockLanguageModelV3 } from 'ai/test';
+
+const vertexMockModel = new MockLanguageModelV3({
+  provider: 'google.vertex.chat',
+  modelId: 'gemini-2.5-flash',
+  supportedUrls() {
+    return {
+      "*": [ /^https?:\/\/.*$/, /^gs:\/\/.*$/ ],
+    }
+  },
+  doGenerate: async () => ({
+    content: [{ type: 'text', text: `Hello, world!` }],
+    finishReason: { unified: 'stop', raw: undefined },
+    usage: {
+      inputTokens: {
+        total: 10,
+        noCache: 10,
+        cacheRead: undefined,
+        cacheWrite: undefined,
+      },
+      outputTokens: {
+        total: 20,
+        text: 20,
+        reasoning: undefined,
+      },
+    },
+    warnings: [],
+  }),
+})
+
 export const contentAssistantAgent = new Agent({
   id: 'content-assistant',
   name: 'Content Assistant',
-  instructions: `You are a helpful content assistant that specializes in:
-- Summarizing documents and text
-- Analyzing content for sentiment, tone, and key themes
-- Providing writing suggestions and improvements
-- Answering questions about document content
-
-When working with documents, provide clear and concise responses.
-If you reference any files, use descriptive names rather than internal paths.
-Always structure your responses in a clear, readable format.`,
-  model: 'openai/gpt-4o',
+  instructions: `Analyze the user's message.`,
+  model: vertexMockModel,
   outputProcessors: [new ExampleOutputProcessor()],
+  inputProcessors: [new ExampleInputProcessor()],
 });

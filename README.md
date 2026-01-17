@@ -1,5 +1,7 @@
 # mastra-beta-debug
 
+## Any issue reported can be reproduced by running `bun src/test.ts`
+
 To install dependencies:
 
 ```bash
@@ -16,4 +18,4 @@ Studio:
 
 ```bash
 bun studio
-```
+  ```
